@@ -1,0 +1,103 @@
+<div class="container-fluid" ng-controller="dashboardController">
+    <h2>Dashboard</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <button ng-click="logout()">Logout</button>
+        </div>
+        <!--<div class="col-md-3">
+            <button ng-click="notification()">send Notification</button>
+        </div>-->
+    </div>
+    <!---CONNECTION--->
+    <div class="row">
+        <h3 style="padding-left: 15px;">Connection</h3>
+        <div class="col-md-3">
+            <h4><span class="label label-default">Host</span></h4>
+            <input type="text" name="host" ng-model="host" />
+        </div>
+        <div class="col-md-3">
+            <h4><span class="label label-default">Port</span></h4>
+            <input type="number" name="port" ng-model="port" />
+        </div>
+        <div class="col-md-3">
+            <h4><span class="label label-default">Client ID</span></h4>
+            <input type="text" name="client_id" ng-model="clientID" />
+        </div>
+
+        <div class="col-md-4" style="margin-top: 20px;">
+            <button ng-click="connect_mosquitto()" type="button" class="btn btn-primary" ng-bind="buttonVal">
+                Connect
+            </button>
+            <br/>
+            <br/>
+
+            <div class="alert" ng-class="Status==='Connected' ? 'alert-success' : 'alert-danger'" role="alert">
+                {{Status}}
+            </div>
+        </div>
+    </div>
+    <!---Connection End---------->
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <iframe src="http://54.218.29.243:5601/app/kibana#/visualize/edit/RealTime-LightData?embed=true&_g=(refreshInterval:(display:'5%20seconds',pause:!f,section:1,value:5000),time:(from:now-1m,mode:relative,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),uiState:(),vis:(aggs:!((id:'1',params:(field:light),schema:metric,type:avg),(id:'2',params:(customInterval:'2h',extended_bounds:(),field:'@timestamp',interval:s,min_doc_count:1),schema:segment,type:date_histogram),(id:'3',params:(field:distance),schema:metric,type:avg)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,drawLinesBetweenPoints:!t,interpolate:linear,radiusRatio:9,scale:linear,setYExtents:!f,shareYAxis:!t,showCircles:!t,smoothLines:!f,times:!(),yAxis:()),title:RealTime-LightData,type:line))"
+                height="600" width="800"></iframe>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>ON/OFF</label>
+                    <input type="checkbox" ng-model="onoff" ng-change="setOnOff()">
+                    <br/>
+                    <label>Set Threshold</label>
+                    <br/>
+                    <input type="text" value="50" ng-model="threshold" />
+                    <br/>
+                    <br/>
+                    <button value="Update" ng-click="setThreshold()" class="btn btn-primary">Update</button>
+                </div>
+                <div class="col-md-6" style="height: 150px;">
+                    <div>
+                        <span class="label label-default" style="float:left">Distance</span>
+                        <span ng-bind="messageObj.distance" class="sensorValues"></span>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <span class="label label-default" style="float:left">Light</span>
+                        <span ng-bind="messageObj.light" class="sensorValues" style="margin-left: 28px;"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>
+						Notification
+					</h3>
+                    <div>
+                        <label>Count:   </label><span ng-bind="notificationCount"></span>
+                    </div>
+                    <div class="alert alert-danger alert-dismissable" ng-hide="notification===null">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4>
+							{{notification.Topic}}
+						</h4> {{notification.String}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Subscription</h3>
+                    
+                    <div class="alert alert-dismissable alert-success" ng-repeat="topic in topics">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="unSubscribe()">
+                            ×
+                        </button>
+                        <h4 ng-bind="topic"></h4>					
+				
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

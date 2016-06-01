@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Nest Thermal Model</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    
+    <style>
+        h4 span {
+            font-family: monospace;
+        }
+        
+        .sensorValues {
+            border: 1px solid black;
+            width: 40px;
+            height: 25px;
+            display: block;
+            float: left;
+            margin-left: 10px;
+            padding-left: 5px;
+        }
+    </style>
+</head>
+
+<body ng-app="iotApp" ng-controller="indexController">
+
+    <div ui-view></div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="mqttws31.js"></script>
+    <script src="js/angular-ui-router.min.js"></script>
+    <script src="app.js"></script>
+    <script src="nestController.js"></script>
+    <script src="js/elasticsearch.angular.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-3"></div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+            <h4 style="border-bottom: 1px solid #c5c5c5;">    
+                    Account Access
+                </h4>
+            <div ng-hide="alert===''">
+                <uib-alert type="danger" close="closeAlert()" style="font-family: sans-serif;margin-bottom:0px">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{alert}}
+                </uib-alert>
+            </div>
+            <div style="padding: 20px;" uib-collapse="LoginPanel">
+                <form method="post" ng-submit="SignIn()">
+                    <h4> Sign In! </h4>
+
+                    <fieldset>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </span>
+                            <input ng-model="LoginData.username" placeholder="Username" type="text" required class="form-control">
+                        </div>
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock"></i>
+                                </span>
+                            <input ng-model="LoginData.password" placeholder="Password" type="password" required class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3"></div>
+    </div>
+</div>
